@@ -66,8 +66,8 @@ class ProductControllerTest {
 
     @Test
     void updateProduct() throws Exception {
-        Product existingP = new Product(1L, "Prod A", "A non living thing", 200);
-        Product updatedP = new Product(1L, "Prod AB", "AB non living thing", 200);
+        Product existingP = new Product(1L, "Prod A", "A", 200);
+        Product updatedP = new Product(1L, "Prod B", "B", 200);
 
         when(productService.getProductById(1L)).thenReturn(Optional.of(existingP));
         when(productService.saveProduct(any(Product.class))).thenReturn(updatedP);
@@ -76,8 +76,8 @@ class ProductControllerTest {
         String updatedProductJson = objectMapper.writeValueAsString(updatedP);
 
         mockMvc.perform(put("/products/1").contentType("application/json").content(updatedProductJson))
-                .andExpect(jsonPath("$.name").value("Prod AB"))
-                .andExpect(jsonPath("$.description").value("AB non living thing"))
+                .andExpect(jsonPath("$.name").value("Prod B"))
+                .andExpect(jsonPath("$.description").value("B"))
                 .andExpect(jsonPath("$.price").value(200));
     }
 
