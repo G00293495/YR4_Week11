@@ -9,8 +9,6 @@ public class ProductMapper {
         dto.setPrice(product.getPrice());
         return dto;
     }
-
-
     public static Product toEntity(ProductDTO productDTO) {
         return new Product(null, productDTO.getName(), productDTO.getDescription(), productDTO.getPrice());
     }
